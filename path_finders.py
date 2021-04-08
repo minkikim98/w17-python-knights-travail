@@ -45,18 +45,20 @@ class KnightPathFinder:
           move_node = Node(move)
           curr_node.add_child(move_node)
           Q.append(move_node)
-        # if curr_node.value == value:
-        #     return curr_node
-        # else:
-        #     if curr_node.children:
-        #         Q.extend(curr_node.children)
     return None
 
+  def find_path(self, end_pos):
+    end_node = self._root.depth_search(end_pos)
+    return self.trace_to_route(end_node)
+
+  def trace_to_route(self, end_node, path=[]):
+    end_list = [end_node.value]
+    end_list.extend(path)
+    if not end_node.parent:
+      return end_list
+    return self.trace_to_route(end_node.parent, end_list)
 
 
-finder = KnightPathFinder((4, 4))
+finder = KnightPathFinder((0, 0))
 finder.build_move_tree()
-print(finder._root.children)
-
-# print(finder.new_move_positions((3,3)))
-# print(finder._root)
+print(finder.find_path((1,7)))
