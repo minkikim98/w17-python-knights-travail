@@ -61,3 +61,6 @@ class Node:
                 if curr_node.children:
                     Q.extend(curr_node.children)
         return None
+
+    def __repr__(self):
+        return f"<Node value: ({self._value})>"
